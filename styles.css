@@ -269,6 +269,71 @@ main {
   transform: translateY(0) scale(1);
 }
 
+/* ===== Religious Places page ===== */
+
+.hero--compact {
+  min-height: 44vh;
+}
+
+.rp-type-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 0.28rem 0.75rem;
+  margin: 0 0 0.6rem;
+}
+
+.rp-hindu  { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+.rp-mosque { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+.rp-church { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+
+.rp-feature {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.rp-feature-body p,
+.rp-feature-body h3 {
+  margin-bottom: 0.55rem;
+}
+
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.rp-card {
+  grid-column: span 4;
+}
+
+.rp-cta {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(130deg, var(--accent-2) 0%, #0d9488 100%);
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 980px) {
+  .rp-feature { grid-template-columns: 1fr; }
+  .rp-card    { grid-column: span 6; }
+}
+
+@media (max-width: 700px) {
+  .rp-card { grid-column: span 12; }
+}
+
 @media (max-width: 980px) {
   .stat-card,
   .travel-grid .card {
