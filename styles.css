@@ -359,6 +359,10 @@ main {
 }
 
 @media (max-width: 700px) {
+  .ambient {
+    display: none;
+  }
+
   .hero {
     min-height: auto;
     padding-bottom: 2rem;
@@ -372,6 +376,17 @@ main {
   .travel-grid .card,
   .faq-grid .card {
     grid-column: span 12;
+  }
+
+  .card {
+    backdrop-filter: none;
+    background: #fff;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 

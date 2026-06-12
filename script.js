@@ -1,20 +1,60 @@
+const setupLazyMediaLoading = () => {
+  const imageNodes = document.querySelectorAll('img');
+
+  imageNodes.forEach((imageNode) => {
+    if (!imageNode.hasAttribute('loading')) {
+      imageNode.setAttribute('loading', 'lazy');
+    }
+
+    if (!imageNode.hasAttribute('decoding')) {
+      imageNode.setAttribute('decoding', 'async');
+    }
+
+    if (!imageNode.hasAttribute('fetchpriority')) {
+      imageNode.setAttribute('fetchpriority', 'low');
+    }
+  });
+
+  const iframeNodes = document.querySelectorAll('iframe');
+
+  iframeNodes.forEach((iframeNode) => {
+    if (!iframeNode.hasAttribute('loading')) {
+      iframeNode.setAttribute('loading', 'lazy');
+    }
+  });
+};
+
+setupLazyMediaLoading();
+
 const revealNodes = document.querySelectorAll('.reveal');
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.15,
-  }
-);
+const showAllRevealNodes = () => {
+  revealNodes.forEach((node) => node.classList.add('visible'));
+};
 
-revealNodes.forEach((node) => revealObserver.observe(node));
+const shouldSkipRevealAnimation =
+  !('IntersectionObserver' in window) || window.matchMedia('(max-width: 700px)').matches;
+
+if (revealNodes.length && !shouldSkipRevealAnimation) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.05,
+      rootMargin: '0px 0px -5% 0px',
+    }
+  );
+
+  revealNodes.forEach((node) => revealObserver.observe(node));
+} else {
+  showAllRevealNodes();
+}
 
 const counterNodes = document.querySelectorAll('.stat[data-count]');
 
@@ -46,16 +86,20 @@ const animateCounter = (node) => {
   requestAnimationFrame(tick);
 };
 
-const statObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        statObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.5 }
-);
+if ('IntersectionObserver' in window) {
+  const statObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
-counterNodes.forEach((node) => statObserver.observe(node));
+  counterNodes.forEach((node) => statObserver.observe(node));
+} else {
+  counterNodes.forEach((node) => animateCounter(node));
+}
