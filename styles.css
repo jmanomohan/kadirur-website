@@ -227,24 +227,29 @@ main {
   background: #fff;
 }
 
-.timeline-item {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+.timeline-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 1rem;
+  margin: 0;
+}
+
+.timeline-list dt,
+.timeline-list dd {
+  margin: 0;
   padding: 0.6rem 0;
   border-bottom: 1px dashed var(--line);
 }
 
-.timeline-item span {
+.timeline-list dt {
+  color: var(--ink-soft);
+}
+
+.timeline-list dd {
+  text-align: right;
   font-weight: 800;
   color: var(--accent-2);
   font-size: 1.15rem;
-}
-
-.timeline-item p {
-  margin: 0;
-  color: var(--ink-soft);
 }
 
 .map-wrap {
