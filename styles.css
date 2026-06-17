@@ -29,7 +29,9 @@ body {
   line-height: 1.6;
 }
 
-.ambient {
+body::before,
+body::after {
+  content: "";
   position: fixed;
   z-index: -1;
   width: 280px;
@@ -39,13 +41,13 @@ body {
   opacity: 0.35;
 }
 
-.ambient-left {
+body::before {
   left: -100px;
   top: 25vh;
   background: #fca5a5;
 }
 
-.ambient-right {
+body::after {
   right: -120px;
   top: 60vh;
   background: #67e8f9;
@@ -78,9 +80,16 @@ body {
 }
 
 .nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.nav-links li {
+  margin: 0;
 }
 
 .nav-links a {
@@ -188,6 +197,7 @@ main {
 }
 
 .stat {
+  display: block;
   font-size: 2rem;
   color: var(--accent);
   font-weight: 800;
