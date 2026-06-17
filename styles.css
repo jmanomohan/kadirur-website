@@ -196,6 +196,16 @@ main {
   box-shadow: var(--shadow);
 }
 
+.ad-card {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.ad-card .kicker {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
 .stat {
   display: block;
   font-size: 2rem;
